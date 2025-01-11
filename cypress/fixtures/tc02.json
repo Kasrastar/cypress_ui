@@ -1,0 +1,14 @@
+{
+    "firstName": "Ali",
+    "lastName": "Khamoush",
+    "userEmail": "test@test.com",
+    "gender": "Male",
+    "userNumber": "0123456789",
+    "dateOfBirth": "15th January 1992",
+    "subjectsInput": "Computer science",
+    "hobbies": "Sports,Reading",
+    "picture": "download.jpg",
+    "currentAddress": "Iran",
+    "stateAndCity": "NCR, Delhi"
+}
+  
