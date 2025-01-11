@@ -75,7 +75,35 @@ describe('Verify user can submit the form.', () => {
       cy.selectState('#react-select-4-input', city);
       cy.get('.css-1uccc91-singleValue').should('contain', city);
 
+      // Submit the form
+      cy.get("#submit").click();
+      
 
+      let extractedData = {};
+
+      // Iterate through each row in the tbody
+      cy.get('table.table tbody tr').each(($row) => {
+        // Extract the label (first column) and value (second column)
+        const label = $row.find('td:first').text().trim();
+        const value = $row.find('td:last').text().trim();
+
+        // Store the label-value pair in the object
+        extractedData[label] = value;
+      }).then(() => {
+        // Log the extracted data
+        cy.log(JSON.stringify(extractedData));
+        // Compare testData information with extractedData
+        expect(extractedData['Student Name']).to.equal(`${this.testData.firstName} ${this.testData.lastName}`);
+        expect(extractedData['Student Email']).to.equal(this.testData.userEmail);
+        expect(extractedData['Gender']).to.equal(this.testData.gender);
+        expect(extractedData['Mobile']).to.equal(this.testData.userNumber);
+        expect(extractedData['Date of Birth'].replace(',', ' ')).to.equal(this.testData.dateOfBirth.replace('th', ''));
+        // expect(extractedData['Subjects']).to.equal(this.testData.subjectsInput);
+        expect(extractedData['Hobbies']).to.equal(this.testData.hobbies.replace(',', ', '));
+        expect(extractedData['Picture']).to.equal(this.testData.picture);
+        expect(extractedData['Address']).to.equal(this.testData.currentAddress);
+        expect(extractedData['State and City']).to.equal(this.testData.stateAndCity.replace(',', ''));
+      });
 
   });
 });
